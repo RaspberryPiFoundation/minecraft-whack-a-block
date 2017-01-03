@@ -18,14 +18,10 @@ This project is split into five parts.
 4. Whack blocks: turn the blocks back to stone when the player hits them.
 5. Game over: how many points did you score?
 
-## Open IDLE 3
-
 [[[idle-opening]]]
 
-## Open Minecraft
 
 [[[minecraft-opening]]]
 
-## Testing Minecraft Pi
 
 [[[minecraft-testing]]]
