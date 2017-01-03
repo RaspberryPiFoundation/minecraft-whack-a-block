@@ -1,1 +1,2 @@
-# minecraft-whack-a-block
+# minecraft-whack-a-block 
+Some readme content
