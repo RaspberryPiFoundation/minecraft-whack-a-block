@@ -28,12 +28,12 @@ Now that you are all set-up and ready to go, you can begin creating your game. Y
 
 Here's the code you need:
 
-```python
+~~~ python
 import mcpi.minecraft as minecraft
 import mcpi.block as block
 import random
 import time
-```
+~~~
 - `mcpi.minecraft` is needed to interact with Minecraft: Pi Edition
 - `mcpi.block` is needed to refer to blocks by name rather than ID
 - `random` is used to create random numbers
@@ -41,35 +41,35 @@ import time
 
 Then create a connection to Minecraft: Pi Edition.
 
-```python
+~~~ python
 mc = minecraft.Minecraft.create()
-```
+~~~
 
 The next step is to create the game board; this consists of 3x3 stone blocks, which will randomly turn into glowstone and light up.
 
 The game board will be created just in front of the player, so the first step is to get the player's position using `player.getTilePos()`:  
 
-```python
+~~~ python
 pos = mc.player.getTilePos()
-```
+~~~
 
 The player's position is then used with the `setBlocks()` function to create the game board out of stone:
 
-```python
+~~~ python
 mc.setBlocks(pos.x - 1, pos.y, pos.z + 3,
              pos.x + 1, pos.y + 2, pos.z + 3,
              block.STONE.id)
-```
+~~~
 
 ![Whac-a-block game board](images/minecraft-game-board.png)
 
 To give the player a warning that the game is about to start, post a couple of messages to the chat window and put a delay into the program using `time.sleep(seconds)`:
 
-```python
+~~~ python
 mc.postToChat("Get ready ...")
 time.sleep(2)
 mc.postToChat("Go")
-```
+~~~
 
 Run the program again. You should see the game board appear directly in front of the player, and the messages "Get ready ..." and "Go".
 
@@ -79,19 +79,19 @@ Next, you are going to create the code which will turn the stone blocks to glows
 
 Create a variable called `blocksLit`; this will hold the number of blocks which are currently lit (i.e. turned into glowstone). Next, create a variable called `points` which will hold how many points the player has scored. As it's the start of the game, set them both to 0:
 
-```python
+~~~ python
 blocksLit = 0
 points = 0
-```
+~~~
 
 Your program will need to loop until the game is over, or in this case until all the blocks are lit.
 
 Create a `while` loop which will continue until the `blocksLit` variable is 9 (i.e. all the blocks are turned to glowstone). Next, put a small delay of 0.2 seconds into the program; otherwise it will run so fast, you won't be able to whack any blocks!
 
-```python
+~~~ python
 while blocksLit < 9:
     time.sleep(0.2)
-```
+~~~
 
 From now on, the code will be indented under this `while` loop.
 
@@ -101,31 +101,31 @@ The method you will use is a really simple one. The code creates a random positi
 
 Create a variable called `lightCreated` then set it to `False`; next, create a `while` loop which will continue until `lightCreated` is set to `True`. You should also increase the number of `blocksLit` by 1, to show that another block will be lit:
 
-```python
+~~~ python
     blocksLit = blocksLit + 1
     lightCreated = False
     while not lightCreated:
-```
+~~~
 
 Once a block is successfully turned to glowstone, `lightCreated` will be set to `True` and the loop will exit. 
 
 Inside this loop use `random.randint(start, end)` to create a random `x` (between -1 and 1) and `y` (between 0 and 2) position on the game board:  
 
-```python
+~~~ python
         xPos = pos.x + random.randint(-1,1)
         yPos = pos.y + random.randint(0,2)
         zPos = pos.z + 3
-```
+~~~
 
 ![A random block lit up](images/minecraft-random-block.png)
 
 Use `getBlock(x,y,z)` and an `if` statement to check if the block at the random position is STONE. If it is, set it to glowstone using `setBlock(x,y,z,blockId)` and make `lightCreated = True`; if this is not changed, the code will go back to the start of the loop and find another random position.
 
-```python
+~~~ python
         if mc.getBlock(xPos, yPos, zPos) == block.STONE.id:
             mc.setBlock(xPos, yPos, zPos, block.GLOWSTONE_BLOCK.id)
             lightCreated = True
-```
+~~~
 
 **Note**: Rather than using the ID numbers of blocks (e.g. stone = 1, glowstone = 89), you can use the `block` module, which holds all the block IDs and their names (e.g. `block.STONE.id`).
 
@@ -139,33 +139,34 @@ You will use events to find out the position of the block which was hit, before 
 
 Indented under the `while blocksLit < 9` loop, create the following code to loop through the block hit events list:
 
-```python
+~~~ python
     for hitBlock in mc.events.pollBlockHits():
-```
+~~~
 
 **Note**: The `hitBlock` variable holds the *event* which has happened. It contains lots of information, including which block was hit, what face was hit and who hit it. You can see this information in the Python shell by using `print hitBlock`.
 
 Use `getBlock(x,y,z)`, the `hitBlock` event data and an `if` statement to see if the block hit was glowstone. If it was, use `setBlock(x,y,z,blockId)` to set it back to stone before reducing the `blocksLit` variable and adding 1 to the player's `points`:
 
-```python
+~~~ python
         if mc.getBlock(hitBlock.pos.x, hitBlock.pos.y, hitBlock.pos.z) == block.GLOWSTONE_BLOCK.id:
             mc.setBlock(hitBlock.pos.x, hitBlock.pos.y, hitBlock.pos.z, block.STONE.id)
             blocksLit = blocksLit - 1
             points = points + 1 
-```
+~~~
 
 Run the program. The game board should appear and this time when the blocks are lit, if you hit them by right-clicking with a sword, they should turn off.
 
 **Hint: Click here to see the full code**
 {: .hint-heading #hint-1 }
 
-	from gpiozero import MotionSensor<br>
-	
-	pir = MotionSensor({var1} 
-	
-	pir.wait_for_motion() 
-	print('Motion detected!') 
+~~~ python
+from gpiozero import MotionSensor
 
+pir = MotionSensor({var1} 
+
+pir.wait_for_motion() 
+print('Motion detected!') 
+~~~
 {: .hint-content .hint-1 }
 
 
@@ -173,7 +174,7 @@ Run the program. The game board should appear and this time when the blocks are 
 
 The last step in the game is to let the player know it's "Game Over" and to tell them how many points they scored. The very last line of the program should be:
 
-~~~python
+~~~ python
 mc.postToChat("Game Over - points = " + str(points))
 ~~~
 
