@@ -159,13 +159,13 @@ Run the program. The game board should appear and this time when the blocks are 
 **Hint: Click here to see the full code**
 {: .hint-heading #hint-1 }
 
-~~~ python
-from gpiozero import MotionSensor 
-pir = MotionSensor({var1} 
+	from gpiozero import MotionSensor<br>
+	
+	pir = MotionSensor({var1} 
+	
+	pir.wait_for_motion() 
+	print('Motion detected!') 
 
-pir.wait_for_motion() 
-print('Motion detected!') 
-~~~
 {: .hint-content .hint-1 }
 
 
@@ -173,8 +173,8 @@ print('Motion detected!')
 
 The last step in the game is to let the player know it's "Game Over" and to tell them how many points they scored. The very last line of the program should be:
 
-```python
+~~~python
 mc.postToChat("Game Over - points = " + str(points))
-```
+~~~
 
 ![Game over](images/minecraft-game-over.png)
