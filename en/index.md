@@ -1,6 +1,4 @@
-# Minecraft Whack A Mole
-
-![Minecraft Pi banner](images/minecraft-pi-banner.png)
+# Minecraft Whack A Block
 
 Minecraft is a popular sandbox open-world building game. A free version of Minecraft is available for the Raspberry Pi; it also comes with a programming interface. This means you can write commands and scripts in Python code to build things in the game automatically. It's a great way to learn Python!  
 
@@ -18,10 +16,16 @@ This project is split into five parts.
 4. Whack blocks: turn the blocks back to stone when the player hits them.
 5. Game over: how many points did you score?
 
+
+
 [[[idle-opening]]]
 
 
+
+
 [[[minecraft-opening]]]
+
+
 
 
 [[[minecraft-testing]]]
