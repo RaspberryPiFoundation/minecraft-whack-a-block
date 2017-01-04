@@ -156,15 +156,15 @@ Use `getBlock(x,y,z)`, the `hitBlock` event data and an `if` statement to see if
 
 Run the program. The game board should appear and this time when the blocks are lit, if you hit them by right-clicking with a sword, they should turn off.
 
-Hint: Click here to see the full code
+**Hint: Click here to see the full code**
 {: .hint-heading #hint-1 }
 
 ~~~ python
-from gpiozero import MotionSensor
-pir = MotionSensor({var1}
+from gpiozero import MotionSensor 
+pir = MotionSensor({var1} 
 
-pir.wait_for_motion()
-print('Motion detected!')
+pir.wait_for_motion() 
+print('Motion detected!') 
 ~~~
 {: .hint-content .hint-1 }
 
