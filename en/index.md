@@ -62,7 +62,7 @@ Now that you are all set-up and ready to go, you can begin creating your game. Y
 	
 ## Challenge.
 
-> Do you think this means?
+> What do you think this means?
 
 ### Hint 1
 {: .hint-heading #hint-1 }
@@ -83,8 +83,13 @@ Have a look at this image and see if it any help to you.
 
 ### Hint 4
 {: .hint-heading #hint-4 }
-<iframe width="100%" height="100%" src="https://www.youtube.com/embed/dd_tMc455Rc" frameborder="0" allowfullscreen></iframe>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/dd_tMc455Rc" frameborder="0" allowfullscreen></iframe>
 {: .hint-content .hint-4}
+
+### Hint 4
+{: .hint-heading #hint-5 }
+[[[idle-opening]]]
+{: .hint-content .hint-5}
 
 ## Setting some blocks
 
@@ -106,7 +111,7 @@ Have a look at this image and see if it any help to you.
 	mc.postToChat("Go")
 	~~~
 
-Run the program again. You should see the game board appear directly in front of the player, and the messages "Get ready ..." and "Go".
+1.  Run the program again. You should see the game board appear directly in front of the player, and the messages "Get ready ..." and "Go".
 
 ## Turn the blocks on
 
@@ -125,7 +130,7 @@ Run the program again. You should see the game board appear directly in front of
 
 	~~~ python
 	while blocksLit < 9:
-		sleep(0.2)
+		sleep(1)
 	~~~
 
 	From now on, the code will be indented under this `while` loop.
