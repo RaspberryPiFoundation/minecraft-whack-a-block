@@ -86,87 +86,85 @@ Have a look at this image and see if it any help to you.
 <iframe width="560" height="315" src="https://www.youtube.com/embed/dd_tMc455Rc" frameborder="0" allowfullscreen></iframe>
 {: .hint-content .hint-4}
 
+## Setting some blocks
 
-![Whack-a-block game board](images/minecraft-game-board.png)
+1.  The player's position can now be used to set some blocks. The `mc.setBlocks()` function can be used to create the game board out of stone:
 
+	~~~ python
+	mc.setBlocks(pos.x - 1, pos.y, pos.z + 3,
+				 pos.x + 1, pos.y + 2, pos.z + 3,
+				 block.STONE.id)
+	~~~
 
-The player's position is then used with the `setBlocks()` function to create the game board out of stone:
+	![Whac-a-block game board](images/minecraft-game-board.png)
 
-~~~ python
-mc.setBlocks(pos.x - 1, pos.y, pos.z + 3,
-			 pos.x + 1, pos.y + 2, pos.z + 3,
-			 block.STONE.id)
-~~~
+1.  To give the player a warning that the game is about to start, post a couple of messages to the chat window and put a delay into the program using `sleep(seconds)`:
 
-![Whac-a-block game board](images/minecraft-game-board.png)
-
-To give the player a warning that the game is about to start, post a couple of messages to the chat window and put a delay into the program using `sleep(seconds)`:
-
-~~~ python
-mc.postToChat("Get ready ...")
-sleep(2)
-mc.postToChat("Go")
-~~~
+	~~~ python
+	mc.postToChat("Get ready ...")
+	sleep(2)
+	mc.postToChat("Go")
+	~~~
 
 Run the program again. You should see the game board appear directly in front of the player, and the messages "Get ready ..." and "Go".
 
 ## Turn the blocks on
 
-Next, you are going to create the code which will turn the stone blocks to glowstone and light them up. The blocks will turn on randomly; you will use the `randint(start, end)` function to pick the random block on the game board.
+1.  Next, you are going to create the code which will turn the stone blocks to glowstone and light them up. The blocks will turn on randomly; you will use the `randint(start, end)` function to pick the random block on the game board.
 
-Create a variable called `blocksLit`; this will hold the number of blocks which are currently lit (i.e. turned into glowstone). Next, create a variable called `points` which will hold how many points the player has scored. As it's the start of the game, set them both to 0:
+1.  Create a variable called `blocksLit`; this will hold the number of blocks which are currently lit (i.e. turned into glowstone). Next, create a variable called `points` which will hold how many points the player has scored. As it's the start of the game, set them both to 0:
 
-~~~ python
-blocksLit = 0
-points = 0
-~~~
+	~~~ python
+	blocksLit = 0
+	points = 0
+	~~~
 
-Your program will need to loop until the game is over, or in this case until all the blocks are lit.
+1.  Your program will need to loop until the game is over, or in this case until all the blocks are lit.
 
-Create a `while` loop which will continue until the `blocksLit` variable is 9 (i.e. all the blocks are turned to glowstone). Next, put a small delay of 0.2 seconds into the program; otherwise it will run so fast, you won't be able to whack any blocks!
+	Create a `while` loop which will continue until the `blocksLit` variable is 9 (i.e. all the blocks are turned to glowstone). Next, put a small delay of 0.2 seconds into the program; otherwise it will run so fast, you won't be able to whack any blocks!
 
-~~~ python
-while blocksLit < 9:
-    sleep(0.2)
-~~~
+	~~~ python
+	while blocksLit < 9:
+		sleep(0.2)
+	~~~
 
-From now on, the code will be indented under this `while` loop.
+	From now on, the code will be indented under this `while` loop.
 
-The next step is to randomly turn a block into glowstone. This is more difficult than it sounds: what happens if the block you randomly choose is already glowstone? Your code needs to be able to deal with this. 
+1.  The next step is to randomly turn a block into glowstone. This is more difficult than it sounds: what happens if the block you randomly choose is already glowstone? Your code needs to be able to deal with this. 
 
-The method you will use is a really simple one. The code creates a random position, checks to see if that block is stone, and if it isn't (i.e. it's glowstone), it tries again and creates a new random position. The code will continue to do this until it finds a block which is still unlit.
+	The method you will use is a really simple one. The code creates a random position, checks to see if that block is stone, and if it isn't (i.e. it's glowstone), it tries again and creates a new random position. The code will continue to do this until it finds a block which is still unlit.
 
-Create a variable called `lightCreated` then set it to `False`; next, create a `while` loop which will continue until `lightCreated` is set to `True`. You should also increase the number of `blocksLit` by 1, to show that another block will be lit:
+	Create a variable called `lightCreated` then set it to `False`; next, create a `while` loop which will continue until `lightCreated` is set to `True`. You should also increase the number of `blocksLit` by 1, to show that another block will be lit:
 
-~~~ python
-    blocksLit = blocksLit + 1
-    lightCreated = False
-    while not lightCreated:
-~~~
+	~~~ python
+		blocksLit = blocksLit + 1
+		lightCreated = False
+		while not lightCreated:
+	~~~
 
-Once a block is successfully turned to glowstone, `lightCreated` will be set to `True` and the loop will exit. 
+	Once a block is successfully turned to glowstone, `lightCreated` will be set to `True` and the loop will exit. 
 
-Inside this loop use `randint(start, end)` to create a random `x` (between -1 and 1) and `y` (between 0 and 2) position on the game board:  
+1.  Inside this loop use `randint(start, end)` to create a random `x` (between -1 and 1) and `y` (between 0 and 2) position on the game board:  
 
-~~~ python
-        xPos = pos.x + randint(-1,1)
-        yPos = pos.y + randint(0,2)
-        zPos = pos.z + 3
-~~~
+	~~~ python
+			xPos = pos.x + randint(-1,1)
+			yPos = pos.y + randint(0,2)
+			zPos = pos.z + 3
+	~~~
 
-![A random block lit up](images/minecraft-random-block.png)
+	![A random block lit up](images/minecraft-random-block.png)
 
-Use `getBlock(x,y,z)` and an `if` statement to check if the block at the random position is STONE. If it is, set it to glowstone using `setBlock(x,y,z,blockId)` and make `lightCreated = True`; if this is not changed, the code will go back to the start of the loop and find another random position.
+1.  Use `getBlock(x,y,z)` and an `if` statement to check if the block at the random position is STONE. If it is, set it to glowstone using `setBlock(x,y,z,blockId)` and make `lightCreated = True`; if this is not changed, the code will go back to the start of the loop and find another random position.
 
-~~~ python
-        if mc.getBlock(xPos, yPos, zPos) == block.STONE.id:
-            mc.setBlock(xPos, yPos, zPos, block.GLOWSTONE_BLOCK.id)
-            lightCreated = True
-~~~
+	~~~ python
+			if mc.getBlock(xPos, yPos, zPos) == block.STONE.id:
+				mc.setBlock(xPos, yPos, zPos, block.GLOWSTONE_BLOCK.id)
+				lightCreated = True
+	~~~
 
-**Note**: Rather than using the ID numbers of blocks (e.g. stone = 1, glowstone = 89), you can use the `block` module, which holds all the block IDs and their names (e.g. `block.STONE.id`).
+	**Note**: Rather than using the ID numbers of blocks (e.g. stone = 1, glowstone = 89), you can use the `block` module, which holds all the block IDs and their names (e.g. `block.STONE.id`).
 
-Run the program by clicking `Run > Run Module` in IDLE or by pressing F5; you should see the game board appear. The stone blocks should then, one by one, turn into glowstone and the program should end when all nine are lit.
+1.  Run the program by clicking `Run > Run Module` in IDLE or by pressing F5; you should see the game board appear. The stone blocks should then, one by one, turn into glowstone and the program should end when all nine are lit.
 
 ## Whack blocks
 
@@ -174,37 +172,24 @@ The player will whack blocks by hitting them (right-clicking) while holding a sw
 
 You will use events to find out the position of the block which was hit, before using `getBlock(x,y,z)` to see if the block hit was glowstone. If it was, you will then use `setBlock(x,y,z,blockId)` to turn it back to stone, before reducing the number of blocks lit and increasing the player's score.
 
-Indented under the `while blocksLit < 9` loop, create the following code to loop through the block hit events list:
+1.  Indented under the `while blocksLit < 9` loop, create the following code to loop through the block hit events list:
 
-~~~ python
-    for hitBlock in mc.events.pollBlockHits():
-~~~
+	~~~ python
+		for hitBlock in mc.events.pollBlockHits():
+	~~~
 
-**Note**: The `hitBlock` variable holds the *event* which has happened. It contains lots of information, including which block was hit, what face was hit and who hit it. You can see this information in the Python shell by using `print hitBlock`.
+	**Note**: The `hitBlock` variable holds the *event* which has happened. It contains lots of information, including which block was hit, what face was hit and who hit it. You can see this information in the Python shell by using `print hitBlock`.
 
-Use `getBlock(x,y,z)`, the `hitBlock` event data and an `if` statement to see if the block hit was glowstone. If it was, use `setBlock(x,y,z,blockId)` to set it back to stone before reducing the `blocksLit` variable and adding 1 to the player's `points`:
+1.  Use `getBlock(x,y,z)`, the `hitBlock` event data and an `if` statement to see if the block hit was glowstone. If it was, use `setBlock(x,y,z,blockId)` to set it back to stone before reducing the `blocksLit` variable and adding 1 to the player's `points`:
 
-~~~ python
-        if mc.getBlock(hitBlock.pos.x, hitBlock.pos.y, hitBlock.pos.z) == block.GLOWSTONE_BLOCK.id:
-            mc.setBlock(hitBlock.pos.x, hitBlock.pos.y, hitBlock.pos.z, block.STONE.id)
-            blocksLit = blocksLit - 1
-            points = points + 1 
-~~~
+	~~~ python
+			if mc.getBlock(hitBlock.pos.x, hitBlock.pos.y, hitBlock.pos.z) == block.GLOWSTONE_BLOCK.id:
+				mc.setBlock(hitBlock.pos.x, hitBlock.pos.y, hitBlock.pos.z, block.STONE.id)
+				blocksLit = blocksLit - 1
+				points = points + 1 
+	~~~
 
-Run the program. The game board should appear and this time when the blocks are lit, if you hit them by right-clicking with a sword, they should turn off.
-
-**Hint: Click here to see the full code**
-{: .hint-heading #hint-20 }
-
-~~~ python
-from gpiozero import MotionSensor
-
-pir = MotionSensor({var1} 
-
-pir.wait_for_motion() 
-print('Motion detected!') 
-~~~
-{: .hint-content .hint-20 }
+1.  Run the program. The game board should appear and this time when the blocks are lit, if you hit them by right-clicking with a sword, they should turn off.
 
 
 ## Game over
