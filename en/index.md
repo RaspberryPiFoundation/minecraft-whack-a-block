@@ -2,11 +2,11 @@
 
 Minecraft is a popular sandbox open-world building game. A free version of Minecraft is available for the Raspberry Pi; it also comes with a programming interface. This means you can write commands and scripts in Python code to build things in the game automatically. It's a great way to learn Python!  
 
-## Whac-a-Block
+## Whack-a-Block
 
-The game you are going to create is called "Whac-a-Block", inspired by the original arcade game ["Whac-a-Mole"](http://en.wikipedia.org/wiki/Whac-A-Mole). The objective of the game is to whack (or hit with a sword) the blocks that light up as glowstone, and turn them back to stone. You will earn points for each block you turn back to stone and the game is over when all the blocks have been turned into glowstone.
+The game you are going to create is called "Whack-a-Block", inspired by the original arcade game ["Whack-a-Mole"](http://en.wikipedia.org/wiki/Whack-A-Mole). The objective of the game is to whack (or hit with a sword) the blocks that light up as glowstone, and turn them back to stone. You will earn points for each block you turn back to stone and the game is over when all the blocks have been turned into glowstone.
 
-![Minecraft Whac-a-Block](images/minecraft-whac-a-block.png)
+![Minecraft Whackk-a-Block](images/minecraft-whac-a-block.png)
 
 This project is split into five parts.
 
@@ -22,9 +22,9 @@ This project is split into five parts.
 
 [[[minecraft-testing]]]
 
-## Build a Whac-A-Block game board
+## Build a Whack-A-Block game board
 
-Now that you are all set-up and ready to go, you can begin creating your game. You can start with a fresh new Python script. Save it as `whac_a_block.py`
+Now that you are all set-up and ready to go, you can begin creating your game. You can start with a fresh new Python script. Save it as `whack_a_block.py`
 
 Here's the code you need:
 
@@ -62,7 +62,7 @@ mc.setBlocks(pos.x - 1, pos.y, pos.z + 3,
              block.STONE.id)
 ~~~
 
-![Whac-a-block game board](images/minecraft-game-board.png)
+![Whack-a-block game board](images/minecraft-game-board.png)
 
 To give the player a warning that the game is about to start, post a couple of messages to the chat window and put a delay into the program using `time.sleep(seconds)`:
 
