@@ -83,7 +83,7 @@ Have a look at this image and see if it any help to you.
 
 ### Hint 4
 {: .hint-heading #hint-4 }
-<iframe width="560" height="315" src="https://www.youtube.com/embed/dd_tMc455Rc" frameborder="0" allowfullscreen></iframe>
+<iframe width="100%" src="https://www.youtube.com/embed/dd_tMc455Rc" frameborder="0" allowfullscreen></iframe>
 {: .hint-content .hint-4}
 
 ## Setting some blocks
