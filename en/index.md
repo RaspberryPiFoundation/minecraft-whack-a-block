@@ -83,7 +83,6 @@ Have a look at this image and see if it any help to you.
 
 ### Hint 4
 {: .hint-heading #hint-4 }
-Have a look a this video that explains how these three values can be used to locate your plaing character in the Minecraft world.
 <iframe width="560" height="315" src="https://www.youtube.com/embed/dd_tMc455Rc" frameborder="0" allowfullscreen></iframe>
 {: .hint-content .hint-4}
 
