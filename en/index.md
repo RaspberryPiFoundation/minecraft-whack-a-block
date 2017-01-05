@@ -73,11 +73,14 @@ The first part of the line is `Vec3` which basically means the three numbers aft
 {: .hint-heading #hint-2 }
 The three numbers are often given the symbols of `x`, `y` and `z` in both mathematics and computer games. The `x`, `y` and `z` are directions and the value of the three numbers are their magnitude.
 {: .hint-content .hint-2 }
+
 ### Hint 3
 {: .hint-heading #hint-3 }
 Have a look at this image and see if it any help to you.
-![x y z](https://commons.wikimedia.org/wiki/File:Coord_system_CA_0.svg#/media/File:Coord_system_CA_0.svg)
+![x y z](https://upload.wikimedia.org/wikipedia/commons/6/69/Coord_system_CA_0.svg)
+> By Jorge Stolfii (Own work) [Public domain], via Wikimedia Commons
 {: .hint-content .hint-3 }
+
 ### Hint 4
 {: .hint-heading #hint-4 }
 Have a look a this video that explains how these three values can be used to locate your plaing character in the Minecraft world.
