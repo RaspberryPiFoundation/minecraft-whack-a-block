@@ -1,20 +1,14 @@
 # Minecraft Whack A Block
 
-Minecraft is a popular sandbox open-world building game. A free version of Minecraft is available for the Raspberry Pi; it also comes with a programming interface. This means you can write commands and scripts in Python code to build things in the game automatically. It's a great way to learn Python!  
+Minecraft is a popular sandbox open-world building game. A free version of Minecraft is available for the Raspberry Pi; it also comes with a programming interface. This means you can write commands and scripts in Python code to build things in the game automatically. It's a great way to learn Python!
 
-## Whac-a-Block
+## Whack-a-Block
 
-The game you are going to create is called "Whac-a-Block", inspired by the original arcade game ["Whac-a-Mole"](http://en.wikipedia.org/wiki/Whac-A-Mole). The objective of the game is to whack (or hit with a sword) the blocks that light up as glowstone, and turn them back to stone. You will earn points for each block you turn back to stone and the game is over when all the blocks have been turned into glowstone.
+The game you are going to create is called "Whack-a-Block", inspired by the original arcade game ["Whac-a-Mole"](http://en.wikipedia.org/wiki/Whac-A-Mole). The objective of the game is to whack (or hit with a sword) the blocks that light up as glowstone, and turn them back to stone. You will earn points for each block you turn back to stone and the game is over when all the blocks have been turned into glowstone.
 
 ![Minecraft Whac-a-Block](images/minecraft-whac-a-block.png)
 
-This project is split into five parts.
-
-1. Create the program: starting your Minecraft Python program and making sure everything is working.
-2. Build the game board: creating the code which will make game board appear in front of the player.
-3. Turn the blocks on: coding the functions to turn the blocks randomly into glowstone.
-4. Whack blocks: turn the blocks back to stone when the player hits them.
-5. Game over: how many points did you score?
+To create this game you're going to need to use Minecraft Pi Edition on the Raspberry Pi, and the Python 3 programming environment IDLE.
 
 [[[idle-opening]]]
 
@@ -26,49 +20,90 @@ This project is split into five parts.
 
 Now that you are all set-up and ready to go, you can begin creating your game. You can start with a fresh new Python script. Save it as `whac_a_block.py`
 
-Here's the code you need:
+1.  The first thing to do is to import the neccessary modules for your game
 
-~~~ python
-import mcpi.minecraft as minecraft
-import mcpi.block as block
-import random
-import time
-~~~
+	~~~ python
+	from mcpi.minecraft import Minecraft
+	import mcpi.block as block
+	from random import randint
+	from time import sleep
+	~~~
 
-- `mcpi.minecraft` is needed to interact with Minecraft: Pi Edition
-- `mcpi.block` is needed to refer to blocks by name rather than ID
-- `random` is used to create random numbers
-- `time` is used to put delays into your program
+  - `Minecraft` is needed to interact with Minecraft: Pi Edition
+  - `mcpi.block` is needed to refer to blocks by name rather than ID
+  - `randint` is used to create random intgerst (whole numbers)
+  - `sleep` is used to put delays into your program
 
-Then create a connection to Minecraft: Pi Edition.
+1.  Below your imports you can create a connection to Minecraft: Pi Edition.
 
-~~~ python
-mc = minecraft.Minecraft.create()
-~~~
+	~~~ python
+	mc = Minecraft.create()
+	~~~
 
-The next step is to create the game board; this consists of 3x3 stone blocks, which will randomly turn into glowstone and light up.
+1.	The next step is to create the game board; this consists of 3x3 stone blocks, which will randomly turn into glowstone and light up.
 
-The game board will be created just in front of the player, so the first step is to get the player's position using `player.getTilePos()`:  
+	The game board will be created just in front of the player, so the first step is to get the player's position using `player.getTilePos()`:  
 
-~~~ python
-pos = mc.player.getTilePos()
-~~~
+	~~~ python
+	pos = mc.player.getTilePos()
+	~~~
+	
+1.  You can now run this program, although nothing will happen yet. If you now switch over to the IDLE shell, you can try and type the following line of code:
 
-The player's position is then used with the `setBlocks()` function to create the game board out of stone:
+	~~~ python
+	print(pos)
+	~~~
 
-~~~ python
-mc.setBlocks(pos.x - 1, pos.y, pos.z + 3,
-             pos.x + 1, pos.y + 2, pos.z + 3,
-             block.STONE.id)
-~~~
+1.  You should see some something like the following printed out in the shell.
 
-![Whac-a-block game board](images/minecraft-game-board.png)
+	~~~python
+	>>> Vec3(-76,31,-42)
+	~~~
+	
+## Challenge.
 
-To give the player a warning that the game is about to start, post a couple of messages to the chat window and put a delay into the program using `time.sleep(seconds)`:
+> Do you think this means?
+
+### Hint 1
+{: .hint-heading #hint-1 }
+The first part of the line is `Vec3` which basically means the three numbers after it represent a vector. In geometry a vector is a quantity with both magnitude and direction.
+{: .hint-content .hint-1 }
+
+### Hint 2
+{: .hint-heading #hint-2 }
+The three numbers are often given the symbols of `x`, `y` and `z` in both mathematics and computer games. The `x`, `y` and `z` are directions and the value of the three numbers are their magnitude.
+{: .hint-content .hint-2 }
+### Hint 3
+{: .hint-heading #hint-3 }
+Have a look at this image and see if it any help to you.
+![x y z](https://commons.wikimedia.org/wiki/File:Coord_system_CA_0.svg#/media/File:Coord_system_CA_0.svg)
+{: .hint-content .hint-3 }
+### Hint 4
+{: .hint-heading #hint-4 }
+Have a look a this video that explains how these three values can be used to locate your plaing character in the Minecraft world.
+<iframe width="560" height="315" src="https://www.youtube.com/embed/dd_tMc455Rc" frameborder="0" allowfullscreen></iframe>
+{: .hint-content .hint-4}
+
+
+
+
+
+
+	The player's position is then used with the `setBlocks()` function to create the game board out of stone:
+
+	~~~ python
+	mc.setBlocks(pos.x - 1, pos.y, pos.z + 3,
+				 pos.x + 1, pos.y + 2, pos.z + 3,
+				 block.STONE.id)
+	~~~
+
+	![Whac-a-block game board](images/minecraft-game-board.png)
+
+To give the player a warning that the game is about to start, post a couple of messages to the chat window and put a delay into the program using `sleep(seconds)`:
 
 ~~~ python
 mc.postToChat("Get ready ...")
-time.sleep(2)
+sleep(2)
 mc.postToChat("Go")
 ~~~
 
@@ -76,7 +111,7 @@ Run the program again. You should see the game board appear directly in front of
 
 ## Turn the blocks on
 
-Next, you are going to create the code which will turn the stone blocks to glowstone and light them up. The blocks will turn on randomly; you will use the `random.randint(start, end)` function to pick the random block on the game board.
+Next, you are going to create the code which will turn the stone blocks to glowstone and light them up. The blocks will turn on randomly; you will use the `randint(start, end)` function to pick the random block on the game board.
 
 Create a variable called `blocksLit`; this will hold the number of blocks which are currently lit (i.e. turned into glowstone). Next, create a variable called `points` which will hold how many points the player has scored. As it's the start of the game, set them both to 0:
 
@@ -91,7 +126,7 @@ Create a `while` loop which will continue until the `blocksLit` variable is 9 (i
 
 ~~~ python
 while blocksLit < 9:
-    time.sleep(0.2)
+    sleep(0.2)
 ~~~
 
 From now on, the code will be indented under this `while` loop.
@@ -110,11 +145,11 @@ Create a variable called `lightCreated` then set it to `False`; next, create a `
 
 Once a block is successfully turned to glowstone, `lightCreated` will be set to `True` and the loop will exit. 
 
-Inside this loop use `random.randint(start, end)` to create a random `x` (between -1 and 1) and `y` (between 0 and 2) position on the game board:  
+Inside this loop use `randint(start, end)` to create a random `x` (between -1 and 1) and `y` (between 0 and 2) position on the game board:  
 
 ~~~ python
-        xPos = pos.x + random.randint(-1,1)
-        yPos = pos.y + random.randint(0,2)
+        xPos = pos.x + randint(-1,1)
+        yPos = pos.y + randint(0,2)
         zPos = pos.z + 3
 ~~~
 
@@ -158,7 +193,7 @@ Use `getBlock(x,y,z)`, the `hitBlock` event data and an `if` statement to see if
 Run the program. The game board should appear and this time when the blocks are lit, if you hit them by right-clicking with a sword, they should turn off.
 
 **Hint: Click here to see the full code**
-{: .hint-heading #hint-1 }
+{: .hint-heading #hint-20 }
 
 ~~~ python
 from gpiozero import MotionSensor
@@ -168,7 +203,7 @@ pir = MotionSensor({var1}
 pir.wait_for_motion() 
 print('Motion detected!') 
 ~~~
-{: .hint-content .hint-1 }
+{: .hint-content .hint-20 }
 
 
 ## Game over
