@@ -4,9 +4,9 @@ Minecraft is a popular sandbox open-world building game. A free version of Minec
 
 ## Whack-a-Block
 
-The game you are going to create is called "Whack-a-Block", inspired by the original arcade game ["Whac-a-Mole"](http://en.wikipedia.org/wiki/Whac-A-Mole). The objective of the game is to whack (or hit with a sword) the blocks that light up as glowstone, and turn them back to stone. You will earn points for each block you turn back to stone and the game is over when all the blocks have been turned into glowstone.
+The game you are going to create is called "Whack-a-Block", inspired by the original arcade game ["Whack-a-Mole"](http://en.wikipedia.org/wiki/Whack-A-Mole). The objective of the game is to whack (or hit with a sword) the blocks that light up as glowstone, and turn them back to stone. You will earn points for each block you turn back to stone and the game is over when all the blocks have been turned into glowstone.
 
-![Minecraft Whac-a-Block](images/minecraft-whac-a-block.png)
+![Minecraft Whackk-a-Block](images/minecraft-whac-a-block.png)
 
 To create this game you're going to need to use Minecraft Pi Edition on the Raspberry Pi, and the Python 3 programming environment IDLE.
 
@@ -16,9 +16,9 @@ To create this game you're going to need to use Minecraft Pi Edition on the Rasp
 
 [[[minecraft-testing]]]
 
-## Build a Whac-A-Block game board
+## Build a Whack-A-Block game board
 
-Now that you are all set-up and ready to go, you can begin creating your game. You can start with a fresh new Python script. Save it as `whac_a_block.py`
+Now that you are all set-up and ready to go, you can begin creating your game. You can start with a fresh new Python script. Save it as `whack_a_block.py`
 
 1.  The first thing to do is to import the neccessary modules for your game
 
@@ -85,19 +85,18 @@ Have a look a this video that explains how these three values can be used to loc
 {: .hint-content .hint-4}
 
 
+![Whack-a-block game board](images/minecraft-game-board.png)
 
 
+The player's position is then used with the `setBlocks()` function to create the game board out of stone:
 
+~~~ python
+mc.setBlocks(pos.x - 1, pos.y, pos.z + 3,
+			 pos.x + 1, pos.y + 2, pos.z + 3,
+			 block.STONE.id)
+~~~
 
-	The player's position is then used with the `setBlocks()` function to create the game board out of stone:
-
-	~~~ python
-	mc.setBlocks(pos.x - 1, pos.y, pos.z + 3,
-				 pos.x + 1, pos.y + 2, pos.z + 3,
-				 block.STONE.id)
-	~~~
-
-	![Whac-a-block game board](images/minecraft-game-board.png)
+![Whac-a-block game board](images/minecraft-game-board.png)
 
 To give the player a warning that the game is about to start, post a couple of messages to the chat window and put a delay into the program using `sleep(seconds)`:
 
