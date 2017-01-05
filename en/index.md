@@ -18,7 +18,7 @@ To create this game you're going to need to use Minecraft Pi Edition on the Rasp
 
 ## Build a Whack-A-Block game board
 
-Now that you are all set-up and ready to go, you can begin creating your game. You can start with a fresh new Python script. Save it as `whack_a_block.py`
+You can now begin creating your game. You can start with a fresh new Python script. Save it as `whack_a_block.py`
 
 1.  The first thing to do is to import the neccessary modules for your game
 
@@ -86,12 +86,9 @@ Have a look at this image and see if it any help to you.
 <iframe width="560" height="315" src="https://www.youtube.com/embed/dd_tMc455Rc" frameborder="0" allowfullscreen></iframe>
 {: .hint-content .hint-4}
 
-### Hint 4
-{: .hint-heading #hint-5 }
-[[[idle-opening]]]
-{: .hint-content .hint-5}
+[[[setting-blocks]]]
 
-## Setting some blocks
+## Setting your blocks
 
 1.  The player's position can now be used to set some blocks. The `mc.setBlocks()` function can be used to create the game board out of stone:
 
@@ -100,6 +97,7 @@ Have a look at this image and see if it any help to you.
 				 pos.x + 1, pos.y + 2, pos.z + 3,
 				 block.STONE.id)
 	~~~
+
 
 	![Whac-a-block game board](images/minecraft-game-board.png)
 
