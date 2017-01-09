@@ -29,13 +29,11 @@ To begin with you're going to need to know Steve's position in the game. If you 
 
 	~~~ python
 	from mcpi.minecraft import Minecraft
-	import mcpi.block as block
 	from random import randint
 	from time import sleep
 	~~~
 
   - `Minecraft` is needed to interact with Minecraft: Pi Edition
-  - `mcpi.block` is needed to refer to blocks by name rather than ID
   - `randint` is used to create random intgerst (whole numbers)
   - `sleep` is used to put delays into your program
 
@@ -44,7 +42,6 @@ To begin with you're going to need to know Steve's position in the game. If you 
 	~~~ python
 	mc = Minecraft.create()
 	~~~
-
 
 1. The next step is to create the game board; this consists of 3x3 stone blocks, which will randomly turn into glowstone and light up.
 
@@ -91,16 +88,16 @@ You now have all the skills and knowledge you need to create your game board. Yo
 ### Hint 1
 {: .hint-heading #hint-5 }
 Try the following steps:  
-1. Get Steve's position
+1. Get Steve's position  
 2. Set some stone blocks so that they are 3 spaces away from Steve, and at the same height as him. The miidle blocks should be facing Steve directly.
 {: .hint-content .hint-5 }
 
 ### Hint 2
 {: .hint-heading #hint-6 }
 Here are the coordinates you'll need to set the blocks.  
-1. Steve's position -1 on the `x` to Steve's position + 1 on the `x`
-2. Steve's position on the `y` to Steve's position + 2 on the `y`
-3. Steve's position + 3 on the `z` to Steve's position + 3 on the `z`
+1. Steve's position -1 on the `x` to Steve's position + 1 on the `x`  
+2. Steve's position on the `y` to Steve's position + 2 on the `y`  
+3. Steve's position + 3 on the `z` to Steve's position + 3 on the `z`  
 {: .hint-content .hint-6 }
 
 ### Hint 3
