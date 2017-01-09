@@ -1,12 +1,13 @@
 # Minecraft Whack A Block
 
-Minecraft is a popular sandbox open-world building game. A free version of Minecraft is available for the Raspberry Pi; it also comes with a programming interface. This means you can write commands and scripts in Python code to build things in the game automatically. It's a great way to learn Python!
+Minecraft is one fo the World's most popular open-world building games.
+A free version of Minecraft is available for the Raspberry Pi; it also comes with a programming interface. This means you can write commands and scripts in Python code to build things in the game automatically. It's a great way to learn Python!
 
 ## Whack-a-Block
 
-The game you are going to create is called "Whack-a-Block", inspired by the original arcade game ["Whack-a-Mole"](http://en.wikipedia.org/wiki/Whack-A-Mole). The objective of the game is to whack (or hit with a sword) the blocks that light up as glowstone, and turn them back to stone. You will earn points for each block you turn back to stone and the game is over when all the blocks have been turned into glowstone.
+The game you are going to create is called "Whack-a-Block", inspired by the original arcade game ["Whac-a-Mole"](http://en.wikipedia.org/wiki/Whac-A-Mole). The objective of the game is to whack (or hit with a sword) the blocks that light up as glowstone, and turn them back to stone. You will earn points for each block you turn back to stone and the game is over when all the blocks have been turned into glowstone.
 
-![Minecraft Whackk-a-Block](images/minecraft-whac-a-block.png)
+![Minecraft Whack-a-Block](images/minecraft-whac-a-block.png)
 
 To create this game you're going to need to use Minecraft Pi Edition on the Raspberry Pi, and the Python 3 programming environment IDLE.
 
@@ -20,7 +21,11 @@ To create this game you're going to need to use Minecraft Pi Edition on the Rasp
 
 You can now begin creating your game. You can start with a fresh new Python script. Save it as `whack_a_block.py`
 
-1.  The first thing to do is to import the neccessary modules for your game
+To begin with you're going to need to know Steve's position in the game. If you don't know how to do this, then you can use the section below, or skip forward if you already know how to do this.
+
+[[[minecraft-steves-position]]]
+
+1.  Start by importing the required modules.
 
 	~~~ python
 	from mcpi.minecraft import Minecraft
@@ -34,72 +39,85 @@ You can now begin creating your game. You can start with a fresh new Python scri
   - `randint` is used to create random intgerst (whole numbers)
   - `sleep` is used to put delays into your program
 
-1.  Below your imports you can create a connection to Minecraft: Pi Edition.
+1.  Then below your imports you can create a connection to Minecraft: Pi Edition.
 
 	~~~ python
 	mc = Minecraft.create()
 	~~~
 
-1.	The next step is to create the game board; this consists of 3x3 stone blocks, which will randomly turn into glowstone and light up.
 
-	The game board will be created just in front of the player, so the first step is to get the player's position using `player.getTilePos()`:  
+1. The next step is to create the game board; this consists of 3x3 stone blocks, which will randomly turn into glowstone and light up.
 
-	~~~ python
-	pos = mc.player.getTilePos()
-	~~~
-	
-1.  You can now run this program, although nothing will happen yet. If you now switch over to the IDLE shell, you can try and type the following line of code:
+## Challenge
 
-	~~~ python
-	print(pos)
-	~~~
-
-1.  You should see some something like the following printed out in the shell.
-
-	~~~python
-	>>> Vec3(-76,31,-42)
-	~~~
-	
-## Challenge.
-
-> What do you think this means?
+The game board needs to be created just in front of the player, so the first step is to get the player's *tile* position and save it as a variable. Call the variable `pos`.
 
 ### Hint 1
 {: .hint-heading #hint-1 }
-The first part of the line is `Vec3` which basically means the three numbers after it represent a vector. In geometry a vector is a quantity with both magnitude and direction.
+Have a read through the **Finding Steve's Position in Minecraft** section for a refresher on how to do this.
 {: .hint-content .hint-1 }
 
 ### Hint 2
 {: .hint-heading #hint-2 }
-The three numbers are often given the symbols of `x`, `y` and `z` in both mathematics and computer games. The `x`, `y` and `z` are directions and the value of the three numbers are their magnitude.
+The method you need for fetching the player's tile position is `mc.player.getTilePos()`
 {: .hint-content .hint-2 }
 
 ### Hint 3
 {: .hint-heading #hint-3 }
 Have a look at this image and see if it any help to you.
-![x y z](https://upload.wikimedia.org/wikipedia/commons/6/69/Coord_system_CA_0.svg)
-> By Jorge Stolfii (Own work) [Public domain], via Wikimedia Commons
+To save the position of Steve as a variable, you can use the line `pos = mc.player.getTilePos()`
 {: .hint-content .hint-3 }
 
 ### Hint 4
 {: .hint-heading #hint-4 }
+Have a look at this video showing you how to save the players positon.  
 <iframe width="560" height="315" src="https://www.youtube.com/embed/dd_tMc455Rc" frameborder="0" allowfullscreen></iframe>
 {: .hint-content .hint-4}
 
-[[[setting-blocks]]]
+## Setting your blocks near the player
 
-## Setting your blocks
+The gameboard for Whack-a-block will be a 3x3 grid of blocks. These will need to be placed close to Steve's position.
 
-1.  The player's position can now be used to set some blocks. The `mc.setBlocks()` function can be used to create the game board out of stone:
+Use the section below to learn how to set multiple blocks in Minecraft using Python and skip to the next section if you already know how to do this.
 
-	~~~ python
-	mc.setBlocks(pos.x - 1, pos.y, pos.z + 3,
-				 pos.x + 1, pos.y + 2, pos.z + 3,
-				 block.STONE.id)
-	~~~
+[[[minecraft-setting-blocks]]]
 
+## Challenge
 
-	![Whac-a-block game board](images/minecraft-game-board.png)
+You now have all the skills and knowledge you need to create your game board. You need to create a 3 x 3 block of stone, somewhere close to your player's position. It should look something like this:
+
+![gameboard](images/board.png)
+
+### Hint 1
+{: .hint-heading #hint-5 }
+Try the following steps:  
+1. Get Steve's position
+2. Set some stone blocks so that they are 3 spaces away from Steve, and at the same height as him. The miidle blocks should be facing Steve directly.
+{: .hint-content .hint-5 }
+
+### Hint 2
+{: .hint-heading #hint-6 }
+Here are the coordinates you'll need to set the blocks.  
+1. Steve's position -1 on the `x` to Steve's position + 1 on the `x`
+2. Steve's position on the `y` to Steve's position + 2 on the `y`
+3. Steve's position + 3 on the `z` to Steve's position + 3 on the `z`
+{: .hint-content .hint-6 }
+
+### Hint 3
+{: .hint-heading #hint-7 }
+Here's the positions as they would appear in Python  
+~~~ python
+pos.x - 1, pos.y, pos.z + 3,
+pos.x + 1, pos.y + 2, pos.z + 3,
+1
+~~~
+{: .hint-content .hint-7 }
+
+### Hint 4
+{: .hint-heading #hint-8 }
+Have a look at this video showing you how to save the players positon.  
+<iframe width="560" height="315" src="https://www.youtube.com/embed/dd_tMc455Rc" frameborder="0" allowfullscreen></iframe>
+{: .hint-content .hint-8}
 
 1.  To give the player a warning that the game is about to start, post a couple of messages to the chat window and put a delay into the program using `sleep(seconds)`:
 
