@@ -68,7 +68,6 @@ To save the position of Steve as a variable, you can use the line `pos = mc.play
 ### Hint 4
 {: .hint-heading #hint-4 }
 Have a look at this video showing you how to save the players positon.  
-<iframe width="560" height="315" src="https://www.youtube.com/embed/dd_tMc455Rc" frameborder="0" allowfullscreen></iframe>
 {: .hint-content .hint-4}
 
 ## Setting your blocks near the player
@@ -113,10 +112,14 @@ pos.x + 1, pos.y + 2, pos.z + 3,
 ### Hint 4
 {: .hint-heading #hint-8 }
 Have a look at this video showing you how to save the players positon.  
-<iframe width="560" height="315" src="https://www.youtube.com/embed/dd_tMc455Rc" frameborder="0" allowfullscreen></iframe>
+
 {: .hint-content .hint-8}
 
-1.  To give the player a warning that the game is about to start, post a couple of messages to the chat window and put a delay into the program using `sleep(seconds)`:
+## Switching the blocks.
+
+Now that you have a gameboard for the player to use, you need to create the logic for the game itself.
+
+1.  To give the player a warning that the game is about to start, post a couple of messages to the chat window and put a delay into the program using `sleep(seconds)`. The following code can be placed into your program after the initial gameboard has been created.
 
 	~~~ python
 	mc.postToChat("Get ready ...")
@@ -128,23 +131,13 @@ Have a look at this video showing you how to save the players positon.
 
 ## Turn the blocks on
 
-1.  Next, you are going to create the code which will turn the stone blocks to glowstone and light them up. The blocks will turn on randomly; you will use the `randint(start, end)` function to pick the random block on the game board.
+1.  Next, you are going to create the code which will turn the stone blocks to glowstone and light them up. The blocks will turn on randomly, to make the game a little trickier.
 
 1.  Create a variable called `blocksLit`; this will hold the number of blocks which are currently lit (i.e. turned into glowstone). Next, create a variable called `points` which will hold how many points the player has scored. As it's the start of the game, set them both to 0:
-
-	~~~ python
-	blocksLit = 0
-	points = 0
-	~~~
 
 1.  Your program will need to loop until the game is over, or in this case until all the blocks are lit.
 
 	Create a `while` loop which will continue until the `blocksLit` variable is 9 (i.e. all the blocks are turned to glowstone). Next, put a small delay of 0.2 seconds into the program; otherwise it will run so fast, you won't be able to whack any blocks!
-
-	~~~ python
-	while blocksLit < 9:
-		sleep(1)
-	~~~
 
 	From now on, the code will be indented under this `while` loop.
 
