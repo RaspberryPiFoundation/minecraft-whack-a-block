@@ -45,7 +45,7 @@ To begin with you're going to need to know Steve's position in the game. If you 
 
 1. The next step is to create the game board; this consists of 3x3 stone blocks, which will randomly turn into glowstone and light up.
 
-## Challenge
+### Challenge
 
 The game board needs to be created just in front of the player, so the first step is to get the player's *tile* position and save it as a variable. Call the variable `pos`.
 
@@ -68,6 +68,7 @@ To save the position of Steve as a variable, you can use the line `pos = mc.play
 ### Hint 4
 {: .hint-heading #hint-4 }
 Have a look at this video showing you how to save the players positon.  
+
 {: .hint-content .hint-4}
 
 ## Setting your blocks near the player
@@ -78,7 +79,7 @@ Use the section below to learn how to set multiple blocks in Minecraft using Pyt
 
 [[[minecraft-setting-blocks]]]
 
-## Challenge
+### Challenge
 
 You now have all the skills and knowledge you need to create your game board. You need to create a 3 x 3 block of stone, somewhere close to your player's position. It should look something like this:
 
@@ -131,9 +132,19 @@ Now that you have a gameboard for the player to use, you need to create the logi
 
 ## Turn the blocks on
 
-1.  Next, you are going to create the code which will turn the stone blocks to glowstone and light them up. The blocks will turn on randomly, to make the game a little trickier.
+To begin the next part of the program, you'll need to create two new variables and set them both to the value of `0`. `blocksLit` stores the number of blocks that have been "lit-up". `points` will store the number of blocks that the player has managed to hit.
 
-1.  Create a variable called `blocksLit`; this will hold the number of blocks which are currently lit (i.e. turned into glowstone). Next, create a variable called `points` which will hold how many points the player has scored. As it's the start of the game, set them both to 0:
+~~~ python
+blocksLit = 0
+points = 0
+~~~
+
+You now need to write your main game loop. To start off with, you'll need to know a little bit about how you can generate random numbers in Python. Skip down to the section below, if you are already familiar with this.
+
+[[[python-random]]]
+
+### Challenge
+
 
 1.  Your program will need to loop until the game is over, or in this case until all the blocks are lit.
 
@@ -168,12 +179,12 @@ Now that you have a gameboard for the player to use, you need to create the logi
 1.  Use `getBlock(x,y,z)` and an `if` statement to check if the block at the random position is STONE. If it is, set it to glowstone using `setBlock(x,y,z,blockId)` and make `lightCreated = True`; if this is not changed, the code will go back to the start of the loop and find another random position.
 
 	~~~ python
-			if mc.getBlock(xPos, yPos, zPos) == block.STONE.id:
-				mc.setBlock(xPos, yPos, zPos, block.GLOWSTONE_BLOCK.id)
+			if mc.getBlock(xPos, yPos, zPos) == 1:
+				mc.setBlock(xPos, yPos, zPos, 89)
 				lightCreated = True
 	~~~
 
-	**Note**: Rather than using the ID numbers of blocks (e.g. stone = 1, glowstone = 89), you can use the `block` module, which holds all the block IDs and their names (e.g. `block.STONE.id`).
+	**Note**: Rather than using the ID numbers of blocks (e.g. stone = 1, glowstone = 89), you can use the `block` module, which holds all the block IDs and their names (e.g. `1`).
 
 1.  Run the program by clicking `Run > Run Module` in IDLE or by pressing F5; you should see the game board appear. The stone blocks should then, one by one, turn into glowstone and the program should end when all nine are lit.
 
@@ -194,8 +205,8 @@ You will use events to find out the position of the block which was hit, before 
 1.  Use `getBlock(x,y,z)`, the `hitBlock` event data and an `if` statement to see if the block hit was glowstone. If it was, use `setBlock(x,y,z,blockId)` to set it back to stone before reducing the `blocksLit` variable and adding 1 to the player's `points`:
 
 	~~~ python
-			if mc.getBlock(hitBlock.pos.x, hitBlock.pos.y, hitBlock.pos.z) == block.GLOWSTONE_BLOCK.id:
-				mc.setBlock(hitBlock.pos.x, hitBlock.pos.y, hitBlock.pos.z, block.STONE.id)
+			if mc.getBlock(hitBlock.pos.x, hitBlock.pos.y, hitBlock.pos.z) == 89:
+				mc.setBlock(hitBlock.pos.x, hitBlock.pos.y, hitBlock.pos.z, 1)
 				blocksLit = blocksLit - 1
 				points = points + 1 
 	~~~
