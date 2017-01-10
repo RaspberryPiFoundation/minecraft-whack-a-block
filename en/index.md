@@ -115,7 +115,7 @@ Have a look at this video showing you how to save the players positon.
 
 {: .hint-content .hint-8}
 
-## Switching the blocks.
+## Getting the player ready
 
 Now that you have a gameboard for the player to use, you need to create the logic for the game itself.
 
