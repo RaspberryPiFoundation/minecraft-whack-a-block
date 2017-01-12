@@ -1,6 +1,6 @@
 # Minecraft Whack A Block
 
-Minecraft is one fo the World's most popular open-world building games.
+Minecraft is one of the World's most popular open-world building games.
 A free version of Minecraft is available for the Raspberry Pi; it also comes with a programming interface. This means you can write commands and scripts in Python code to build things in the game automatically. It's a great way to learn Python!
 
 ## Whack-a-Block
@@ -17,104 +17,143 @@ To create this game you're going to need to use Minecraft Pi Edition on the Rasp
 
 [[[minecraft-testing]]]
 
+
 ## Build a Whack-A-Block game board
 
-You can now begin creating your game. You can start with a fresh new Python script. Save it as `whack_a_block.py`
+1.  You can now begin creating your game. You can start with a fresh new Python script. Save it as `whac_a_block.py`
 
-To begin with you're going to need to know Steve's position in the game. If you don't know how to do this, then you can use the section below, or skip forward if you already know how to do this.
+1.  Next you want to import the neccessary module and create a connection to Minecraft
+
+~~~ python
+from mcpi.minecraft import Minecraft
+
+mc = Minecraft.create()
+~~~
+
+1.  To begin with you're going to need to know Steve's position in the game. If you don't know how to do this, then you can use the section below, or skip forward if you already know how to do this.
 
 [[[minecraft-steves-position]]]
 
-1.  Start by importing the required modules.
+1.  Now that you know how to get Steve's position, you can begin your program by storing his poition as three variables. You can use `px`, `py`, and `pz`
+
+~~~ python
+px, py, pz = mc.player.getPos()
+~~~
+
+## Representing the game board
+
+You can represent the game board using a two-dimensional list. If you've never used 2d lists before then check out the section below, or skip to the next section if you are familiar with them.
+
+[[[python-2d-lists]]]
+
+1.  The game board for Whac-A-Block is going to be a 3x3 grid of blocks. This is most easily represented by a 2d list. The rows within the list can contain the minecraft block values. In this case you can use `1` to represent a Stone block.
 
 	~~~ python
-	from mcpi.minecraft import Minecraft
-	from random import randint
-	from time import sleep
+	board = [[1, 1, 1],
+			 [1, 1, 1],
+			 [1, 1, 1]]
 	~~~
 
-  - `Minecraft` is needed to interact with Minecraft: Pi Edition
-  - `randint` is used to create random intgerst (whole numbers)
-  - `sleep` is used to put delays into your program
+1.  Now you can create a function to draw the board. Have a look at the sections below on how to use the `enumerate` function in Python and how to set a block in Minecraft, and then have a go at the challenge.
 
-1.  Then below your imports you can create a connection to Minecraft: Pi Edition.
+[[[python-enumerate]]]
 
-	~~~ python
-	mc = Minecraft.create()
-	~~~
-
-1. The next step is to create the game board; this consists of 3x3 stone blocks, which will randomly turn into glowstone and light up.
+[[[minecraft-set-block]]]
 
 ### Challenge
 
-The game board needs to be created just in front of the player, so the first step is to get the player's *tile* position and save it as a variable. Call the variable `pos`.
+Create a function called `draw_board`, that takes no arguments. In the function you will need two nested `for` loops to `enumerate` through the 2d board list.
+The loops should set blocks, 3 spaces away from the player's `z` position, and a number of spaces away from the player's `x` and `y` postion equal to the indices in the list. The block should correspond to the values in the lists.
+
+So for instance:
+- the first block would be placed 0 spaces away from the player on both `x` and `y`.
+- the second block would be placed 1 spaces away from the player on the `x` and 0 spaces away on the `y`
+- the third block would be placed 2 spaces away from the player on the `x` and 0 spaces away on the `y`
+- the fourth block would be placed 0 spaces away from the player on the `x` and 1 space away on the `y`
 
 ### Hint 1
 {: .hint-heading #hint-1 }
-Have a read through the **Finding Steve's Position in Minecraft** section for a refresher on how to do this.
+Here's what the code would look like in structured English.  
+1. Define the function `draw_board`  
+2. Enumerate over each row in the `board`  
+3. Enumerate over each block in the `row`  
+4. Set a block adding the index of the block to Steve's `px` position, and the index of the row to Steve's `py` position. You should always add 3 to Steve's `pz` position.
 {: .hint-content .hint-1 }
 
 ### Hint 2
 {: .hint-heading #hint-2 }
-The method you need for fetching the player's tile position is `mc.player.getTilePos()`
+To enumerate over the board, your first `for` loop would look something like this:  
+~~~ python
+for y, row in enumerate(board):
+~~~
 {: .hint-content .hint-2 }
 
 ### Hint 3
 {: .hint-heading #hint-3 }
-Have a look at this image and see if it any help to you.
-To save the position of Steve as a variable, you can use the line `pos = mc.player.getTilePos()`
+Your final line within the nested `for` loops should look something like this:  
+~~~ python
+mc.setBlock(px+x, py+y, pz + 3, block)
+~~~
 {: .hint-content .hint-3 }
 
 ### Hint 4
 {: .hint-heading #hint-4 }
-Have a look at this video showing you how to save the players positon.  
-
+Have a look at this video of the code being written and run if you are completely stuck.  
+![challenge1](images/challenge1.gif)
 {: .hint-content .hint-4}
 
-## Setting your blocks near the player
+## Switching a random block
 
-The gameboard for Whack-a-block will be a 3x3 grid of blocks. These will need to be placed close to Steve's position.
+1.  The next stage is to add in the **mole** from the original game, which in your case is going to be a block of `glowstone`. Glowstone has an id of 89.
 
-Use the section below to learn how to set multiple blocks in Minecraft using Python and skip to the next section if you already know how to do this.
+1.  Change any of the items in the `board` 2d list to the number 89.
 
-[[[minecraft-setting-blocks]]]
+	~~~ python
+	board = [[1, 1, 1],
+			 [1, 89, 1],
+			 [1, 1, 1]]
+	~~~
 
-### Challenge
+1.  Now if you run your script again and call the `draw_board()` function in the shell, you should see a block of glowstone appearing in the board.
 
-You now have all the skills and knowledge you need to create your game board. You need to create a 3 x 3 block of stone, somewhere close to your player's position. It should look something like this:
+1.  To make the glowstone appear anywhere in the board, you just need to shuffle the lists. This way the `89` can appear anywhere.
 
-![gameboard](images/board.png)
+1.  If you don't know how to shuffle lists, have a look at the section below. If you already know about shuffling, you can skip to the challenge.
+
+[[[python-sort-shuffle-lists]]]
+
+## Challenge
+
+Define a function called `pop_up()` that takes no arguments. Within the function, shuffle each row of the `board` list, and then shuffle the `board` itself. Once this has been completed, call the `draw_board()` function.
 
 ### Hint 1
 {: .hint-heading #hint-5 }
-Try the following steps:  
-1. Get Steve's position  
-2. Set some stone blocks so that they are 3 spaces away from Steve, and at the same height as him. The miidle blocks should be facing Steve directly.
+1. First you'll need to use a `for` loop to iterate through `board` and shuffle each row.  
+2. Then you can shuffle the board.  
+3. Lastly you can call the `draw_board` function.  
 {: .hint-content .hint-5 }
 
 ### Hint 2
 {: .hint-heading #hint-6 }
-Here are the coordinates you'll need to set the blocks.  
-1. Steve's position -1 on the `x` to Steve's position + 1 on the `x`  
-2. Steve's position on the `y` to Steve's position + 2 on the `y`  
-3. Steve's position + 3 on the `z` to Steve's position + 3 on the `z`  
+To shuffle the board you can use the line:  
+~~~ python
+shuffle(board)
+~~~
 {: .hint-content .hint-6 }
 
 ### Hint 3
 {: .hint-heading #hint-7 }
-Here's the positions as they would appear in Python  
+To shuffle each row you can use a `for` loop.  
 ~~~ python
-pos.x - 1, pos.y, pos.z + 3,
-pos.x + 1, pos.y + 2, pos.z + 3,
-1
+for row in board:
+    shuffle(row)
 ~~~
 {: .hint-content .hint-7 }
 
 ### Hint 4
 {: .hint-heading #hint-8 }
-Have a look at this video showing you how to save the players positon.  
-
-{: .hint-content .hint-8}
+Have a look at the video below to see the function being written.  
+{: .hint-content .hint-8 }
 
 ## Getting the player ready
 
@@ -132,10 +171,10 @@ Now that you have a gameboard for the player to use, you need to create the logi
 
 ## Turn the blocks on
 
-To begin the next part of the program, you'll need to create two new variables and set them both to the value of `0`. `blocksLit` stores the number of blocks that have been "lit-up". `points` will store the number of blocks that the player has managed to hit.
+To begin the next part of the program, you'll need to create two new variables and set them both to the value of `0`. `blocks_lit` stores the number of blocks that have been "lit-up". `points` will store the number of blocks that the player has managed to hit.
 
 ~~~ python
-blocksLit = 0
+blocks_lit = 0
 points = 0
 ~~~
 
@@ -145,10 +184,11 @@ You now need to write your main game loop. To start off with, you'll need to kno
 
 ### Challenge
 
+You can being your main loop by making a random block change from stone to glowstone.
+1. Use a `while` loop that continues so long as `blocks_lit` is less than 9
+2. Within the loop, 
 
-1.  Your program will need to loop until the game is over, or in this case until all the blocks are lit.
-
-	Create a `while` loop which will continue until the `blocksLit` variable is 9 (i.e. all the blocks are turned to glowstone). Next, put a small delay of 0.2 seconds into the program; otherwise it will run so fast, you won't be able to whack any blocks!
+	Create a `while` loop which will continue until the `blocks_lit` variable is 9 (i.e. all the blocks are turned to glowstone). Next, put a small delay of 0.2 seconds into the program; otherwise it will run so fast, you won't be able to whack any blocks!
 
 	From now on, the code will be indented under this `while` loop.
 
@@ -156,10 +196,10 @@ You now need to write your main game loop. To start off with, you'll need to kno
 
 	The method you will use is a really simple one. The code creates a random position, checks to see if that block is stone, and if it isn't (i.e. it's glowstone), it tries again and creates a new random position. The code will continue to do this until it finds a block which is still unlit.
 
-	Create a variable called `lightCreated` then set it to `False`; next, create a `while` loop which will continue until `lightCreated` is set to `True`. You should also increase the number of `blocksLit` by 1, to show that another block will be lit:
+	Create a variable called `lightCreated` then set it to `False`; next, create a `while` loop which will continue until `lightCreated` is set to `True`. You should also increase the number of `blocks_lit` by 1, to show that another block will be lit:
 
 	~~~ python
-		blocksLit = blocksLit + 1
+		blocks_lit = blocks_lit + 1
 		lightCreated = False
 		while not lightCreated:
 	~~~
@@ -194,7 +234,7 @@ The player will whack blocks by hitting them (right-clicking) while holding a sw
 
 You will use events to find out the position of the block which was hit, before using `getBlock(x,y,z)` to see if the block hit was glowstone. If it was, you will then use `setBlock(x,y,z,blockId)` to turn it back to stone, before reducing the number of blocks lit and increasing the player's score.
 
-1.  Indented under the `while blocksLit < 9` loop, create the following code to loop through the block hit events list:
+1.  Indented under the `while blocks_lit < 9` loop, create the following code to loop through the block hit events list:
 
 	~~~ python
 		for hitBlock in mc.events.pollBlockHits():
@@ -202,12 +242,12 @@ You will use events to find out the position of the block which was hit, before 
 
 	**Note**: The `hitBlock` variable holds the *event* which has happened. It contains lots of information, including which block was hit, what face was hit and who hit it. You can see this information in the Python shell by using `print hitBlock`.
 
-1.  Use `getBlock(x,y,z)`, the `hitBlock` event data and an `if` statement to see if the block hit was glowstone. If it was, use `setBlock(x,y,z,blockId)` to set it back to stone before reducing the `blocksLit` variable and adding 1 to the player's `points`:
+1.  Use `getBlock(x,y,z)`, the `hitBlock` event data and an `if` statement to see if the block hit was glowstone. If it was, use `setBlock(x,y,z,blockId)` to set it back to stone before reducing the `blocks_lit` variable and adding 1 to the player's `points`:
 
 	~~~ python
 			if mc.getBlock(hitBlock.pos.x, hitBlock.pos.y, hitBlock.pos.z) == 89:
 				mc.setBlock(hitBlock.pos.x, hitBlock.pos.y, hitBlock.pos.z, 1)
-				blocksLit = blocksLit - 1
+				blocks_lit = blocks_lit - 1
 				points = points + 1 
 	~~~
 
