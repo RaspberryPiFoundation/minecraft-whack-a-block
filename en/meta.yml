@@ -5,5 +5,27 @@ description: Using the Minecraft Pi Edition API, you can create your own whack-a
 published: true
 
 steps:
-  - title: Step one
+  - title: Introduction
+    duration: 60
+  - title: Whack-a-Block
+    duration: 60
+  - title: Build a Whack-A-Block game board
+    duration: 60
+  - title: Challenge
+    duration: 60
+  - title: Switching a random block
+    duration: 60
+  - title: Challenge
+    duration: 60
+  - title: Getting the player ready
+    duration: 60
+  - title: Turn the blocks on
+    duration: 60
+  - title: Challenge
+    duration: 60
+  - title: Whack blocks
+    duration: 60
+  - title: Game over
+    duration: 60
+  - title: What next?
     duration: 60
