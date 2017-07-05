@@ -1,33 +1,25 @@
 title: Minecraft Pi Whack-A-Block
 hero_image: images/cover.png
-subtitle: A Raspberry Pi whack-a-mole clone
 description: Using the Minecraft Pi Edition API, you can create your own whack-a-mole clone.
 original_url: https://www.raspberrypi.org/learning/minecraft-whac-a-block-game
 theme: rpi-prototype
-published: false
-
+duration: 2
+listed: false
+ingredient: false
+copyedit: false
+interests: "games"
+technologies: "python, minecraft, rpi"
 steps:
   - title: Introduction
-    duration: 60
   - title: Whack-a-Block
-    duration: 60
   - title: Build a Whack-A-Block game board
-    duration: 60
   - title: Challenge
-    duration: 60
   - title: Switching a random block
-    duration: 60
   - title: Challenge
-    duration: 60
   - title: Getting the player ready
-    duration: 60
   - title: Turn the blocks on
-    duration: 60
   - title: Challenge
-    duration: 60
   - title: Whack blocks
-    duration: 60
   - title: Game over
-    duration: 60
   - title: What next?
-    duration: 60
+
