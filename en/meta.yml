@@ -7,19 +7,24 @@ duration: 2
 listed: false
 ingredient: false
 copyedit: false
-interests: "games"
-technologies: "python, minecraft, rpi"
-steps:
-  - title: Introduction
-  - title: Whack-a-Block
-  - title: Build a Whack-A-Block game board
-  - title: Challenge
-  - title: Switching a random block
-  - title: Challenge
-  - title: Getting the player ready
-  - title: Turn the blocks on
-  - title: Challenge
-  - title: Whack blocks
-  - title: Game over
-  - title: What next?
-
+interests: games
+technologies: python, raspberry-pi
+curriculum: 2, design-0, programming-2, phys-comp-0, manufacture-0, community-0
+hardware: raspberry-pi
+software: python
+site_areas: projects
+version: 3
+last_tested: 2017-01-01
+steps: 
+- title: Introduction
+- title: Whack-a-Block
+- title: Build a Whack-A-Block game board
+- title: Challenge
+- title: Switching a random block
+- title: Challenge
+- title: Getting the player ready
+- title: Turn the blocks on
+- title: Challenge
+- title: Whack blocks
+- title: Game over
+- title: What next?
